@@ -16,7 +16,7 @@ import { v4 } from 'uuid';
 import { getDatabase, ref, push, onValue } from 'firebase/database';
 
 export const firestore = getFirestore(firebaseApp);
-
+export const messages = writable<message[]>([]);
 export const currentFirestoreUser = writable<FirestoreUser | null>(null);
 
 const userCollection = collection(firestore, 'users') as CollectionReference<FirestoreUser>;
@@ -33,6 +33,14 @@ export async function userChanges(user: User | null) {
 	};
 
 	currentFirestoreUser.set(userData);
+	const messageRef = ref(messageDatabase, 'messages/');
+	onValue(messageRef, (snapshot) => {
+		const messages = snapshot.val();
+
+		console.log(messages);
+
+		messagesState.set(Object.values(messages).reverse() as message[]);
+	});
 }
 
 const messageDatabase = getDatabase(firebaseApp);
