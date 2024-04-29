@@ -23,8 +23,7 @@
 			workInProgress = true;
 			return;
 		}
-		const emailWithSuffix = email + '@s.com';
-		await data.auth.signIn(emailWithSuffix, password);
+		await data.auth.signIn(email, password);
 	}
 
 	let currentInput = '';
