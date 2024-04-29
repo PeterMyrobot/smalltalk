@@ -19,11 +19,12 @@
 	}
 
 	async function handleSignIn() {
-		if (email == 'test@s.com') {
+		if (email == 'test') {
 			workInProgress = true;
 			return;
 		}
-		await data.auth.signIn(email, password);
+		const emailWithSuffix = email + '@s.com';
+		await data.auth.signIn(emailWithSuffix, password);
 	}
 
 	let currentInput = '';
