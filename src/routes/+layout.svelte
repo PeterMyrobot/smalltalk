@@ -23,7 +23,7 @@
 </svelte:head>
 
 <div
-	class="flex flex-col h-full w-full bg-no-repeat bg-cover bg-[url('https://triptins.com/wp-content/uploads/2023/06/NYC-Sunset-Spots-728x546.jpeg.webp')] min-w-80"
+	class="flex flex-col h-full w-full bg-no-repeat bg-cover bg-[url('https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')] min-w-80"
 >
 	<div class="border-b-4 mx-4 w-[300px] border-white">
 		<h1 class=" pb-2 pt-4 text-2xl text-white">Small Talk</h1>
