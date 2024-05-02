@@ -3,4 +3,6 @@ export interface message {
 	date: Date;
 	userid: string;
 	userName: string;
+	isMark: boolean;
+	uid: string;
 }

@@ -25,9 +25,10 @@
 <div
 	class="flex flex-col h-full w-full bg-no-repeat bg-cover bg-[url('https://images.pexels.com/photos/531880/pexels-photo-531880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')] min-w-80"
 >
-	<div class="border-b-4 mx-4 w-[300px] border-white">
+	<div class="flex border-b-4 mx-4 w-[300px] border-white justify-between">
 		<h1 class=" pb-2 pt-4 text-2xl text-white">Small Talk</h1>
 	</div>
 	<slot></slot>
+	<div class="absolute h-[60px] flex top-0 right-0 items-center z-10"></div>
 	<div class="absolute top-0 right-0 text-vintageNavy text-xs px-2">power by WTY</div>
 </div>

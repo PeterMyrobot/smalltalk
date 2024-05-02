@@ -1,11 +1,15 @@
 <script lang="ts">
-	import { afterUpdate } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 	import Message from '../components/message.svelte';
+	import MarkedButton from '../components/markedButton.svelte';
+
 	import { authState } from '../firebase/auth';
+	import Icon from '@iconify/svelte';
 
 	export let data;
 	let currentFirestoreUser = data.firestore.currentFirestoreUser;
 	let messages = data.firestore.messagesState;
+	let markedMessages = data.firestore.markedMessageState;
 
 	let logginIn = false;
 
@@ -13,6 +17,14 @@
 	let password = '';
 
 	let workInProgress = false;
+
+	function parseScroll() {
+		// console.log(scrollView?.scrollTop);
+		if (scrollView?.scrollTop === 0) {
+			// console.log($messages);
+			// getMessagesByLastKey($messages[0].uid, 10);
+		}
+	}
 
 	async function handleCreate() {
 		await data.auth.createUser(email, password);
@@ -40,8 +52,6 @@
 	let scrollView: HTMLElement | null;
 
 	$: if ($messages && scrollView != null) {
-		console.log(scrollView);
-
 		scrollView.scroll({
 			top: scrollView.scrollHeight,
 			behavior: 'smooth'
@@ -99,7 +109,7 @@
 	</main>
 {:else}
 	<main class="flex flex-1 flex-col overflow-scroll">
-		<div class="flex-auto overflow-scroll" bind:this={scrollView}>
+		<div class="flex-auto overflow-scroll" on:scroll={parseScroll} bind:this={scrollView}>
 			{#each $messages.reverse() as message}
 				<div class="px-4">
 					<Message {message} />
@@ -108,8 +118,11 @@
 		</div>
 
 		<form on:submit|preventDefault={handleSubmit} class="bg-vintageNavy p-3 flex">
-			<textarea bind:value={currentInput} class="flex-1 resize-none" />
-			<button type="submit" class="ml-4 bg-vintageBeige rounded-md p-3">Send</button>
+			<textarea bind:value={currentInput} class="flex-1 resize-none mr-4" />
+			<MarkedButton {markedMessages} />
+			<button type="submit" class="ml-4 rounded-md p-3">
+				<Icon icon="iconamoon:send" class="h-8 w-8 " color="#DFD0B8" />
+			</button>
 		</form>
 	</main>
 {/if}
